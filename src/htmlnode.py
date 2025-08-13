@@ -25,6 +25,8 @@ class LeafNode(HTMLNode):
         super().__init__(tag=tag, value=value, children=None, props=props)
 
     def to_html(self):
+        VOID_TAGS = {'img','br','hr','input', 'meta', 'link'}
+        
         if self.value is None:
             raise ValueError("Value property missing")
         if self.tag is None:
@@ -33,6 +35,8 @@ class LeafNode(HTMLNode):
             open_tag = f"<{self.tag} {self.props_to_html()}>"
         else:
             open_tag = f"<{self.tag}>"
+        if self.tag in VOID_TAGS:
+            return open_tag
         close_tag = f"</{self.tag}>"
         
         return f"{open_tag}{self.value}{close_tag}"
@@ -41,6 +45,7 @@ class LeafNode(HTMLNode):
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         super().__init__(tag=tag, value=None, children=children, props=props)
+    
 
     def to_html(self):
         if self.tag is None:

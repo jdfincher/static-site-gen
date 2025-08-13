@@ -67,7 +67,7 @@ class TestHTMLNode(unittest.TestCase):
             parent_node.to_html(),
             "<div><span><b>grandchild</b></span></div>",
         )
-    def test_to_hrml_with_great_grandchildren(self):
+    def test_to_html_with_great_grandchildren(self):
         great_grandchild = LeafNode("i", "great_grandchild")
         great_grandchild2 = LeafNode("b", "great_grandchild2")
         grandchild = ParentNode("p", [great_grandchild, great_grandchild2])
